@@ -1,0 +1,46 @@
+﻿@model IEnumerable<JukeBox1.Models.SongsModels>
+
+@{
+    ViewBag.Title = "SongsDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        @foreach (var item in Model)
+        {
+        <dt>
+            Naam
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => item.SongName)
+        </dd>
+
+        <dt>
+            Artiest
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => item.Artist)
+        </dd>
+
+        <dt>
+            Duur
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => item.Duration) minuten
+        </dd>
+        }
+    </dl>
+        
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Terug naar lijst", "Songs", "Songs")
+</p>

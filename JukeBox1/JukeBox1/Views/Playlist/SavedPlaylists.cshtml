@@ -1,0 +1,13 @@
+﻿@model IEnumerable<JukeBox1.Models.PlaylistsModels>
+@{
+    ViewBag.Title = "SavedPlaylists";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Opgeslagen afspeellijsten</h2>
+
+@foreach(var item in Model)
+{
+    <button class="btn btn-warning">@item.PlaylistName</button> <br /> <br />
+}
+
