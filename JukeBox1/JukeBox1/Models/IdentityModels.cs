@@ -22,6 +22,8 @@ namespace JukeBox1.Models
     {
         public DbSet<GenresModels> GenresModels { get; set; }
         public DbSet<SongsModels> SongsModels { get; set; }
+        public DbSet<SavedSongsModels> SavedSongsModels { get; set; }
+        public DbSet<PlaylistsModels> PlaylistsModels { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

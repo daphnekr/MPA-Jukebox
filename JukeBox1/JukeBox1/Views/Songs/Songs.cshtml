@@ -1,0 +1,75 @@
+﻿@model JukeBox1.Models.MultipleModels
+
+@{
+    ViewBag.Title = "Songs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Liedjes</h2>
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem { Text = "---Selecteer---", Value = "" });
+    foreach (var item in Model.Genre)
+    {
+        listItems.Add(new SelectListItem
+        {
+            Text = item.Genre,
+            Value = item.Id.ToString()
+        });
+    }
+}
+<div>
+    <p>
+        Filter op genre:
+        @using (Html.BeginForm("SongsByGenre", "Songs", FormMethod.Post))
+        {
+            @Html.DropDownList("GenreId", listItems, new { @class = "form-control", onchange = "this.form.submit();" })
+        }
+    </p>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Naam
+        </th>
+        <th>
+            Artiest
+        </th>
+        <th>
+            Genre
+        </th>
+        <th>
+            Duur
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Songs)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genres.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration) minuten
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "SongsDetails", "Details", new { id = item.Id }, null) |
+                @using (Html.BeginForm("AddSongToPlaylist", "Songs", new { id = item.Id }, FormMethod.Post, null))
+                {
+                    <button class="btn btn-success">Playlist</button>
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>
