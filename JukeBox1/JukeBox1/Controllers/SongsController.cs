@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace JukeBox1.Controllers
 {
     public class SongsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private PlaylistHelper playlistHelper = new PlaylistHelper();
         public ActionResult Songs()
         {
             MultipleModels model = new MultipleModels();
@@ -18,6 +20,12 @@ namespace JukeBox1.Controllers
             model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
             model.Songs = (from songs in db.SongsModels select songs).ToList();
 
+            if (Request.IsAuthenticated)
+            {
+                string id = User.Identity.GetUserId();
+                model.Playlists = (from playlists in db.PlaylistsModels where playlists.UserId == id select playlists);
+            }
+            
             return View("Songs", model);
         }
         public ActionResult SongsByGenre(int id)
@@ -39,14 +47,26 @@ namespace JukeBox1.Controllers
             {
                 int genreIdToInt = Convert.ToInt32(GenreId);
                 model.Songs = (from songs in db.SongsModels where songs.GenreId == genreIdToInt select songs).ToList();
+                if (Request.IsAuthenticated)
+                {
+                    string id = User.Identity.GetUserId();
+                    model.Playlists = (from playlists in db.PlaylistsModels where playlists.UserId == id select playlists);
+                }
                 return PartialView("Songs", model);
             }
             model.Songs = (from songs in db.SongsModels select songs).ToList();
             return PartialView("Songs", model);
         }
-        public ActionResult AddSongToPlaylist(int id)
+        public ActionResult AddSongToPlaylist(int id = 0)
         {
-            PlaylistViewModel.AddSongToPlaylist(id);
+            playlistHelper.AddSongToPlaylist(id);
+            return Songs();
+        }
+        public ActionResult AddSongToExistingPlaylist(int songId, int playlistId)
+        {
+            var playlist = db.PlaylistsModels.Find(playlistId);
+            playlist.SongsIds = playlist.SongsIds + songId + ",";
+            db.SaveChanges();
             return Songs();
         }
     }

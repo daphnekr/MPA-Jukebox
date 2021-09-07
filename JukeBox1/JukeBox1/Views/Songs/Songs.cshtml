@@ -1,5 +1,5 @@
 ﻿@model JukeBox1.Models.MultipleModels
-
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Songs";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -60,14 +60,52 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Duration) minuten
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            <td width="300px">
                 @Html.ActionLink("Details", "SongsDetails", "Details", new { id = item.Id }, null) |
-                @using (Html.BeginForm("AddSongToPlaylist", "Songs", new { id = item.Id }, FormMethod.Post, null))
+                @*<button class="btn btn-success">Playlist</button>*@
+                @if (Session["tempPlaylist"] != null && Session["tempPlaylist"].ToString().Contains(item.Id.ToString()))
                 {
-                    <button class="btn btn-success">Playlist</button>
+                    <p>toegevoegd</p>
                 }
-
+                else
+                {
+                    <p>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target='@("#collapse" + @item.Id)' aria-expanded="false" aria-controls="collapse">
+                            Afspeellijst
+                        </button>
+                    </p>
+                    if (Model.isSucces)
+                    {
+                        <p>Wooohoo</p>
+                    }
+                    <div class="collapse" id='@("collapse" + @item.Id)'>
+                        <div class="card card-body">
+                            @Html.ActionLink("Nieuwe afspeellijst", "AddSongToPlaylist", new { id = item.Id }) |
+                            @if (Request.IsAuthenticated) 
+                            {
+                                <a style="cursor:pointer" data-toggle="collapse" data-target='@("#test" + @item.Id)' aria-expanded="false" aria-controls='@("test" + @item.Id)'>
+                                    Bestaande afspeellijst
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <div class="collapse" id='@("test" + @item.Id)'>
+                        <div class="card card-body">
+                            @if (Request.IsAuthenticated)
+                            {
+                                foreach (var item1 in Model.Playlists)
+                                {
+                                    if (!item1.SongsIds.Contains(item.Id.ToString()))
+                                    {
+                                        <p>
+                                            @Html.ActionLink(item1.PlaylistName, "AddSongToExistingPlaylist", "Songs", new { songId = item.Id, playlistId = item1.Id }, new { @class = "text-success" })
+                                        </p>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                }
             </td>
         </tr>
     }

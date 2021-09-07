@@ -13,6 +13,7 @@ namespace JukeBox1.Models
         [Column("id")]
         public int Id { get; set; }
         [Column("playlistName")]
+        [Required]
         public string PlaylistName { get; set; }
         [Column("userId")]
         public string UserId { get; set; }
