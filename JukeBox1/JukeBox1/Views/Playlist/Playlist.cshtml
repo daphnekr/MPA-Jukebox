@@ -1,5 +1,5 @@
 ﻿@model JukeBox1.Models.MultipleModels
-
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Playlist";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,29 +18,41 @@
         <th></th>
     </tr>
 
-
-    @foreach (var item in Model.Songs)
+    @if (Model.Songs != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SongName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Artist)
-            </td>
-            <td>
-                @Html.ActionLink("Verwijder", "DeleteSongFromPlaylist", new { id = item.Id }) |
-                @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-            </td>
-        </tr>
+        foreach (var item in Model.Songs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SongName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Artist)
+                </td>
+                <td>
+                    @Html.ActionLink("Verwijder", "DeleteSongFromPlaylist", new { id = item.Id }) |
+                </td>
+            </tr>
+        }
     }
 
 </table>
-@using (Html.BeginForm("SavePlaylist", "Playlist", FormMethod.Post))
+@if (Model.Songs != null)
 {
-    @Html.Label("Playlist naam", new { @class = "col-md-2 control-label" })
+    if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("SavePlaylist", "Playlist", FormMethod.Post))
+        {
+            @Html.Label("Afspeelijst naam", new { @class = "col-md-2 control-label" })
 
-    @Html.TextBox("playlistname") <br /><br>
-    <input class="btn btn-primary" value="Playlist opslaan" type="submit">
+            @Html.TextBox("playlistname", null, null, new { @class = "col-md-10" })
+            <br />
+            <br>
+            <input class="btn btn-primary" value="Afspeellijst opslaan" type="submit">
+        }
+    }
+    else
+    {
+        <h3>Registreer of log in om de afspeellijst op te slaan.</h3>
+    }
 }

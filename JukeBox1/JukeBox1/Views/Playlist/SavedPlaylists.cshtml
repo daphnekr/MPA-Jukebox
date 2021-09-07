@@ -5,9 +5,17 @@
 }
 
 <h2>Opgeslagen afspeellijsten</h2>
-
-@foreach(var item in Model)
-{
-    <button class="btn btn-warning">@item.PlaylistName</button> <br /> <br />
-}
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(@item.PlaylistName, "GetUserPlaylistSongs", "Playlist", new { ids = item.SongsIds, playlistId = item.Id }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Verwijder", "DeletePlaylist", "Playlist", new { playlistId = item.Id}, null) 
+            </td>
+        </tr>
+            }
+    </table>
 

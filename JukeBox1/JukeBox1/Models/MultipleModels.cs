@@ -12,5 +12,7 @@ namespace JukeBox1.Models
         public IEnumerable<GenresModels> Genre { get; set; }
         public IEnumerable<PlaylistsModels> Playlists { get; set; }
         public double PlaylistDuration { get; set; }
+        public int PlaylistId { get; set; }
+        public bool isSucces { get; set; }
     }
 }
