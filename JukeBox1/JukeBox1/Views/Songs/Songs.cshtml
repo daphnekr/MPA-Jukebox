@@ -65,7 +65,7 @@
                 @*<button class="btn btn-success">Playlist</button>*@
                 @if (Session["tempPlaylist"] != null && Session["tempPlaylist"].ToString().Contains(item.Id.ToString()))
                 {
-                    <p>toegevoegd</p>
+                    <img src="~/Images/added.png" height="10" />
                 }
                 else
                 {
@@ -74,14 +74,11 @@
                             Afspeellijst
                         </button>
                     </p>
-                    if (Model.isSucces)
-                    {
-                        <p>Wooohoo</p>
-                    }
+
                     <div class="collapse" id='@("collapse" + @item.Id)'>
                         <div class="card card-body">
                             @Html.ActionLink("Nieuwe afspeellijst", "AddSongToPlaylist", new { id = item.Id }) |
-                            @if (Request.IsAuthenticated) 
+                            @if (Request.IsAuthenticated)
                             {
                                 <a style="cursor:pointer" data-toggle="collapse" data-target='@("#test" + @item.Id)' aria-expanded="false" aria-controls='@("test" + @item.Id)'>
                                     Bestaande afspeellijst

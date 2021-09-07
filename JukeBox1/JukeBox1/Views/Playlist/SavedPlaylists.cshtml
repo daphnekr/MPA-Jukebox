@@ -13,7 +13,7 @@
                 @Html.ActionLink(@item.PlaylistName, "GetUserPlaylistSongs", "Playlist", new { ids = item.SongsIds, playlistId = item.Id }, null)
             </td>
             <td>
-                @Html.ActionLink("Verwijder", "DeletePlaylist", "Playlist", new { playlistId = item.Id}, null) 
+                @Html.ActionLink("Verwijder", "DeletePlaylist", "Playlist", new { playlistId = item.Id}, new { onclick = "return confirm('Weet je zeker dat je deze afspeellijst wilt verwijderen?');" }) 
             </td>
         </tr>
             }

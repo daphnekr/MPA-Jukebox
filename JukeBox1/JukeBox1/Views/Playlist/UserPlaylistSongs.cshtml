@@ -43,7 +43,7 @@
             @Html.DisplayFor(modelItem => item.Duration) minuten
         </td>
         <td>
-            @Html.ActionLink("Verwijder", "DeleteFromPlaylist", "Playlist", new { songId = item.Id, playlistId = Model.PlaylistId}, null) |
+            @Html.ActionLink("Verwijder", "DeleteFromPlaylist", "Playlist", new { songId = item.Id, playlistId = Model.PlaylistId}, new { onclick = "return confirm('Weet je zeker dat je dit liedje wilt verwijderen uit je afspeellijst?');" }) |
             @Html.ActionLink("Details", "SongsDetails", "Details", new { id = item.Id }, null)
         </td>
     </tr>

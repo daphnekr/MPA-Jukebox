@@ -13,10 +13,9 @@ namespace JukeBox1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private PlaylistHelper playlistHelper = new PlaylistHelper();
+        MultipleModels model = new MultipleModels();
         public ActionResult Songs()
         {
-            MultipleModels model = new MultipleModels();
-
             model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
             model.Songs = (from songs in db.SongsModels select songs).ToList();
 
@@ -30,7 +29,6 @@ namespace JukeBox1.Controllers
         }
         public ActionResult SongsByGenre(int id)
         {
-            MultipleModels model = new MultipleModels();
             model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
             model.Songs = (from songs in db.SongsModels where songs.GenreId == id select songs).ToList();
             return View("Songs", model);
@@ -39,8 +37,6 @@ namespace JukeBox1.Controllers
         [HttpPost]
         public ActionResult SongsByGenre(string GenreId)
         {
-            MultipleModels model = new MultipleModels();
-
             model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
 
             if (!string.IsNullOrEmpty(GenreId))
@@ -60,6 +56,7 @@ namespace JukeBox1.Controllers
         public ActionResult AddSongToPlaylist(int id = 0)
         {
             playlistHelper.AddSongToPlaylist(id);
+            Session["Added"] = true;
             return Songs();
         }
         public ActionResult AddSongToExistingPlaylist(int songId, int playlistId)
