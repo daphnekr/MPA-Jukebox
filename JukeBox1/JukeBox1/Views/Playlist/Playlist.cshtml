@@ -30,7 +30,7 @@
                     @Html.DisplayFor(modelItem => item.Artist)
                 </td>
                 <td>
-                    @Html.ActionLink("Verwijder", "DeleteSongFromPlaylist", new { id = item.Id }, new { onclick = "return confirm('Weet je zeker dat je dit liedje wilt verwijderen uit je afspeellijst?');" })
+                    @Html.ActionLink("Verwijder", "DeleteSongFromPlaylist", new { id = item.Id }, new { onclick = "return confirm('Weet je zeker dat je dit liedje wilt verwijderen uit je afspeellijst?');" }) |
                 </td>
             </tr>
         }
