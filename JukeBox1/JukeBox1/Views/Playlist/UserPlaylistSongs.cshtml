@@ -1,9 +1,9 @@
 ﻿@model JukeBox1.Models.MultipleModels
 @{
-    ViewBag.Title = "UserPlaylistSongs";
+    ViewBag.Title = "Playlists";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+    <p>Duur playlist: @Html.DisplayFor(m => m.PlaylistDuration) minuten</p>
 @foreach (var item1 in Model.Playlists)
 {
     <h2>@item1.PlaylistName</h2>
@@ -43,7 +43,7 @@
             @Html.DisplayFor(modelItem => item.Duration) minuten
         </td>
         <td>
-            @Html.ActionLink("Verwijder", "DeleteFromPlaylist", "Playlist", new { songId = item.Id, playlistId = Model.PlaylistId}, null) |
+            @Html.ActionLink("Verwijder", "DeleteFromPlaylist", "Playlist", new { songId = item.Id, playlistId = Model.PlaylistId}, new { onclick = "return confirm('Weet je zeker dat je dit liedje wilt verwijderen uit je afspeellijst?');" }) |
             @Html.ActionLink("Details", "SongsDetails", "Details", new { id = item.Id }, null)
         </td>
     </tr>

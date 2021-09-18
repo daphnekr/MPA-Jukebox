@@ -20,28 +20,36 @@ namespace JukeBox1.Models.ViewModels
         {
             Session["tempPlaylist"] = Session["tempPlaylist"] + id.ToString() + ",";
         }
-        public void CalculatePlaylistDuration(MultipleModels songs)
+        public double CalculatePlaylistDuration(MultipleModels songs)
         {
             NumberFormatInfo provider = new NumberFormatInfo();
             provider.NumberDecimalSeparator = ".";
-            List<int> ids = SplitSessionList();
+            List<int> ids = SplitSessionList(songs);
             foreach (var id in ids)
             {
                 var songid = Convert.ToInt32(id);
                 var songItem = (from song in db.SongsModels where song.Id == songid select song).FirstOrDefault();
                 PlaylistMinutes += Convert.ToDouble(songItem.Duration, provider);
             }
+            return PlaylistMinutes;
         }
 
-        public List<int> SplitSessionList()
+        public List<int> SplitSessionList(MultipleModels songs = null)
         {
-            List<string> songIds = Session["tempPlaylist"].ToString().Split(',').ToList();
-
+            List<string> songIds = new List<string>();
+            if (Session["tempPlaylist"] != null)
+            {
+                songIds = Session["tempPlaylist"].ToString().Split(',').ToList();
+            }
+            else
+            {
+                var songss = songs.Playlists.Select(x => x.SongsIds).ToList();
+                songIds =songss[0].ToString().Split(',').ToList();
+            }
             songIds = songIds.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
             List<int> songsIdsInt = new List<int>();
             foreach (string id in songIds)
             {
-
                 songsIdsInt.Add(Convert.ToInt32(id));
             }
             return songsIdsInt;

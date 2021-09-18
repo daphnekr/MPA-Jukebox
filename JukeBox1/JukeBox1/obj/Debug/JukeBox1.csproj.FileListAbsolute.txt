@@ -229,7 +229,6 @@ C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\De
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.addForeignKeySongs.resources
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.addForeignKeysSavedSongs.resources
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.addColumnDuration.resources
-C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.csprojAssemblyReference.cache
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\bin\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\bin\Microsoft.AspNetCore.DataProtection.Abstractions.dll
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\bin\Microsoft.AspNetCore.DataProtection.dll
@@ -297,3 +296,8 @@ C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\bin\Ra
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\bin\Sparrow.xml
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\bin\System.Security.Cryptography.Cng.xml
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.add_validation_playlistname.resources
+C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.revertLastChange.resources
+C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.removeTables.resources
+C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.TableRenaming.resources
+C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.test1.resources

@@ -22,37 +22,43 @@ namespace JukeBox1.Controllers
             if (Session["tempPlaylist"] != null) 
             { 
                 model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
-                playlistHelper.CalculatePlaylistDuration(model);
                 List<int> songsIdsInt = playlistHelper.SplitSessionList();
 
                 model.Songs = (from s in db.SongsModels where songsIdsInt.Contains(s.Id) select s);
 
-                model.PlaylistDuration = playlistHelper.PlaylistMinutes;
+                model.PlaylistDuration = playlistHelper.CalculatePlaylistDuration(model);
             }
             return View("Playlist", model);
         }
 
         public ActionResult DeleteSongFromPlaylist(int id)
         {
+            model.Message = "";
             playlistHelper.Ids.RemoveAll(item => item == id);
             model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
             playlistHelper.RemoveFromSession(id);
-            model.isSucces = true;
+            model.Message = "Het liedje succesvol verwijderd.";
             return Playlist();
         }
         [HttpPost]
         public ActionResult SavePlaylist(string playlistname)
         {
-            var id = User.Identity.GetUserId();
-            PlaylistsModels playlist = new PlaylistsModels
+            model.Error = "";
+            if (!string.IsNullOrEmpty(playlistname))
             {
-                PlaylistName = playlistname,
-                UserId = id,
-                SongsIds = Session["tempPlaylist"].ToString()
-            };
-            db.PlaylistsModels.Add(playlist);
-            db.SaveChanges();
-            Session["tempPlaylist"] = null;
+                var id = User.Identity.GetUserId();
+                Playlists playlist = new Playlists
+                {
+                    PlaylistName = playlistname,
+                    UserId = id,
+                    SongsIds = Session["tempPlaylist"].ToString()
+                };
+                db.PlaylistsModels.Add(playlist);
+                db.SaveChanges();
+                Session["tempPlaylist"] = null;
+                return Playlist();
+            }
+            model.Error = "De naam van de afspeellijst mag niet leeg zijn.";
             return Playlist();
         }
 
@@ -67,6 +73,7 @@ namespace JukeBox1.Controllers
             model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
             model.PlaylistId = (from playlist in db.PlaylistsModels where playlist.Id == playlistId select playlist.Id).FirstOrDefault();
             model.Playlists = (from playlist in db.PlaylistsModels where playlist.Id == playlistId select playlist);
+            model.PlaylistDuration = playlistHelper.CalculatePlaylistDuration(model);
             string[] split = ids.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
             List<int> idsList = Array.ConvertAll(split, s => int.Parse(s)).ToList();
 

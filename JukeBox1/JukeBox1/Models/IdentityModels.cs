@@ -20,10 +20,9 @@ namespace JukeBox1.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<GenresModels> GenresModels { get; set; }
-        public DbSet<SongsModels> SongsModels { get; set; }
-        public DbSet<SavedSongsModels> SavedSongsModels { get; set; }
-        public DbSet<PlaylistsModels> PlaylistsModels { get; set; }
+        public DbSet<Genres> GenresModels { get; set; }
+        public DbSet<Songs> SongsModels { get; set; }
+        public DbSet<Playlists> PlaylistsModels { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
