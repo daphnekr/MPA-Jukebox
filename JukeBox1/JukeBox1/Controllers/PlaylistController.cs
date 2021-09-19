@@ -1,5 +1,4 @@
 ﻿using JukeBox1.Models;
-using JukeBox1.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +25,7 @@ namespace JukeBox1.Controllers
 
                 model.Songs = (from s in db.SongsModels where songsIdsInt.Contains(s.Id) select s);
 
-                model.PlaylistDuration = playlistHelper.CalculatePlaylistDuration(model);
+                model.PlaylistDuration = playlistHelper.CalculatePlaylistDuration();
             }
             return View("Playlist", model);
         }
@@ -73,13 +72,12 @@ namespace JukeBox1.Controllers
             model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
             model.PlaylistId = (from playlist in db.PlaylistsModels where playlist.Id == playlistId select playlist.Id).FirstOrDefault();
             model.Playlists = (from playlist in db.PlaylistsModels where playlist.Id == playlistId select playlist);
-            model.PlaylistDuration = playlistHelper.CalculatePlaylistDuration(model);
             string[] split = ids.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
             List<int> idsList = Array.ConvertAll(split, s => int.Parse(s)).ToList();
 
             model.Songs = db.SongsModels
                    .Where(s => idsList.Contains(s.Id));
-
+            model.PlaylistDuration = playlistHelper.CalculatePlaylistDuration(model);
             return View("UserPlaylistSongs", model);
         }
 

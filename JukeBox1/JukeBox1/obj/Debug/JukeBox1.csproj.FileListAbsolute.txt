@@ -301,3 +301,4 @@ C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\De
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.removeTables.resources
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.TableRenaming.resources
 C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.Migrations.test1.resources
+C:\Users\xdaph\Documents\School\MPA Jukebox\MPA-Jukebox\JukeBox1\JukeBox1\obj\Debug\JukeBox1.csprojAssemblyReference.cache

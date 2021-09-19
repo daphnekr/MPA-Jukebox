@@ -1,5 +1,4 @@
 ﻿using JukeBox1.Models;
-using JukeBox1.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace JukeBox1.Controllers
         public ActionResult Songs()
         {
             model.Genre = (from genres in db.GenresModels orderby genres.Genre ascending select genres).ToList();
-            model.Songs = (from songs in db.SongsModels select songs).ToList();
+            model.Songs = (from songs in db.SongsModels orderby songs.Genres.Genre select songs).ToList();
 
             if (Request.IsAuthenticated)
             {

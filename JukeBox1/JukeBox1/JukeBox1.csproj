@@ -402,7 +402,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MultipleModels.cs" />
     <Compile Include="Models\Playlists.cs" />
-    <Compile Include="Models\ViewModels\PlaylistHelper.cs">
+    <Compile Include="PlaylistHelper.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Models\Songs.cs" />

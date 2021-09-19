@@ -1,9 +1,9 @@
 ﻿@model JukeBox1.Models.MultipleModels
 @{
-    ViewBag.Title = "UserPlaylistSongs";
+    ViewBag.Title = "Playlists";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+    <p>Duur playlist: @Html.DisplayFor(m => m.PlaylistDuration) minuten</p>
 @foreach (var item1 in Model.Playlists)
 {
     <h2>@item1.PlaylistName</h2>
